@@ -1,0 +1,81 @@
+<project name="Euler" default="dist">
+	<description>
+		Project Euler problems from projecteuler.net
+	</description>
+
+	<property name="project" location="com.gatesunder.euler"/>
+	<property name="src.main" location="src/main/java/com/gatesunder/euler"/>
+	<property name="src.test" location="src/test/java/com/gatesunder/euler/test"/>
+	<property name="build" location="build"/>
+	<property name="test" location="test"/>
+	<property name="dist" location="dist"/>
+
+	<!--======================== INIT ==========================-->
+	<target name="init">
+		<tstamp/>
+		<mkdir dir="${build}"/>
+	</target>
+	<target name="dist">
+		<mkdir dir="${dist}"/>
+	</target>
+	<!--========================================================-->
+
+	<!--======================= COMPILE ========================-->
+	<target name="compile_all" depends="init" description="Compile all problems">
+		<javac srcdir="${src.main}" destdir="${build}"/>
+	</target>
+	<target name="compile_P1" depends="init" description="Compile P1">
+		<javac srcdir="${src.main}" includes="P1.java" destdir="${build}"/>
+	</target>
+	<target name="compile_P2" depends="init" description="Compile P2">
+		<javac srcdir="${src.main}" includes="P2.java" destdir="${build}"/>
+	</target>
+	<target name="compile_P3" depends="init" description="Compile P3">
+		<javac srcdir="${src.main}" includes="P3.java, Prime.java" destdir="${build}"/>
+	</target>
+	<!--========================================================-->
+
+	<!--======================== DIST ==========================-->
+	<target name="P1" depends="compile_P1, dist" description="Jar P1">
+		<jar jarfile="${dist}/euler_P1_${DSTAMP}.jar" basedir="${build}">
+			<manifest>
+				<attribute name="Main-Class" value="com.gatesunder.euler.P1"/>
+			</manifest>
+		</jar>
+	</target>
+	<target name="P2" depends="compile_P2, dist" description="Jar P2">
+		<jar jarfile="${dist}/euler_P2_${DSTAMP}.jar" basedir="${build}">
+			<manifest>
+				<attribute name="Main-Class" value="com.gatesunder.euler.P2"/>
+			</manifest>
+		</jar>
+	</target>
+	<target name="P3" depends="compile_P3, dist" description="Jar P3">
+		<jar jarfile="${dist}/euler_P3_${DSTAMP}.jar" basedir="${build}">
+			<manifest>
+				<attribute name="Main-Class" value="com.gatesunder.euler.P3"/>
+			</manifest>
+		</jar>
+	</target>
+	<!--========================================================-->
+
+	<!--======================== TEST ==========================-->
+	<target name="test_all" depends="compile_all">
+		<javac srcdir="${src.test}" destdir="${build}"/>
+		<mkdir dir="${test}"/>
+		<jar jarfile="${test}/euler_test_${DSTAMP}.jar" basedir="${build}">
+			<manifest>
+				<attribute name="Main-Class" value="com.gatesunder.euler.test.TestAll"/>
+			</manifest>
+		</jar>
+	</target>
+	<!--========================================================-->
+
+	<!--======================== CLEAN =========================-->
+	<target name="clean">
+		<delete dir="${build}"/>
+		<delete dir="${test}"/>
+		<delete dir="${dist}"/>
+	</target>
+	<!--========================================================-->
+</project>
