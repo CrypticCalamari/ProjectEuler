@@ -1,3 +1,6 @@
+// Disclaimer: Code is from Wikipedia, but I have worked through it and proved
+//				that it works as advertised.
+
 package com.gatesunder.euler;
 
 public class GCD
