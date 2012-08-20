@@ -21,17 +21,36 @@
 	<!--========================================================-->
 
 	<!--======================= COMPILE ========================-->
+	<target name="problem_interface" description="Compile Problem Interface classes">
+		<javac srcdir="${src.main}" includes="IProblem.java, Problem.java" destdir="${build}"/>
+	</target>
+
+	<target name="prime" description="Compile Prime class">
+		<javac srcdir="${src.main}" destdir="${build}">
+			<include name="Prime.java"/>
+		</javac>
+	</target>
+	<target name="palindrome" description="Compile Palindrome class">
+		<javac srcdir="${src.main}" destdir="${build}">
+			<include name="Palindrome.java"/>
+		</javac>
+	</target>
+
 	<target name="compile_all" depends="init" description="Compile all problems">
 		<javac srcdir="${src.main}" destdir="${build}"/>
 	</target>
+
 	<target name="compile_P1" depends="init" description="Compile P1">
 		<javac srcdir="${src.main}" includes="P1.java" destdir="${build}"/>
 	</target>
 	<target name="compile_P2" depends="init" description="Compile P2">
 		<javac srcdir="${src.main}" includes="P2.java" destdir="${build}"/>
 	</target>
-	<target name="compile_P3" depends="init" description="Compile P3">
-		<javac srcdir="${src.main}" includes="P3.java, Prime.java" destdir="${build}"/>
+	<target name="compile_P3" depends="init, prime" description="Compile P3">
+		<javac srcdir="${src.main}" includes="P3.java" destdir="${build}"/>
+	</target>
+	<target name="compile_P4" depends="init, problem_interface, palindrome" description="Compile P4">
+		<javac srcdir="${src.main}" includes="P4.java" destdir="${build}"/>
 	</target>
 	<!--========================================================-->
 
@@ -54,6 +73,13 @@
 		<jar jarfile="${dist}/euler_P3_${DSTAMP}.jar" basedir="${build}">
 			<manifest>
 				<attribute name="Main-Class" value="com.gatesunder.euler.P3"/>
+			</manifest>
+		</jar>
+	</target>
+	<target name="P4" depends="compile_P4, dist" description="Jar P4">
+		<jar jarfile="${dist}/euler_P4_${DSTAMP}.jar" basedir="${build}">
+			<manifest>
+				<attribute name="Main-Class" value="com.gatesunder.euler.P4"/>
 			</manifest>
 		</jar>
 	</target>
