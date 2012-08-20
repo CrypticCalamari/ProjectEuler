@@ -1,8 +1,6 @@
-++++++++++++++++++++++++++++++++++++++++++
-+ Coder:		Joe Gaspar				 +
-+ Project:		ProjectEuler.net Problems+
-+ Date:			2012.8.18				 +
-++++++++++++++++++++++++++++++++++++++++++
++ Coder:		Joe Gaspar
++ Project:		ProjectEuler.net Problems
++ Date:			2012.8.18
 
 Summary
 =======
