@@ -2,9 +2,15 @@ package com.gatesunder.euler;
 
 import com.gatesunder.euler.IProblem;
 
-public abstract class Problem<T>
+public class Problem<T>
 	implements IProblem<T>
 {
+	protected Problem( Solution<T> solution, String text ) {
+		this.solution = solution;
+		this.text = text;
+		this.solved = false;
+		this.answer = null;
+	}
 	public T getAnswer() {
 		if (!solved)
 			answer = solve();
@@ -12,14 +18,13 @@ public abstract class Problem<T>
 	}
 	public String getText() {return text;}
 	public boolean isSolved() {return solved;}
+	public T solve() {
+		solved = true;
+		return solution.solve();
+	}
 
-	public abstract T solve();
-
-	protected Problem<T> setAnswer( T answer ) {this.answer = answer; return this;}
-	protected Problem<T> setSolved( boolean solved ) {this.solved = solved; return this;}
-	protected Problem<T> setText( String text ) {this.text = text; return this;}
-
+	private Solution<T> solution;
 	private boolean solved;
-	private String text;
 	private T answer;
+	private String text;
 }

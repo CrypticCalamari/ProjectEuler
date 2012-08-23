@@ -22,7 +22,7 @@
 
 	<!--======================= COMPILE ========================-->
 	<target name="problem_interface" description="Compile Problem Interface classes">
-		<javac srcdir="${src.main}" includes="IProblem.java, Problem.java" destdir="${build}"/>
+		<javac srcdir="${src.main}" includes="IProblem.java, Problem.java, ISolution.java, Solution.java" destdir="${build}"/>
 	</target>
 
 	<target name="prime" description="Compile Prime class">
@@ -40,21 +40,22 @@
 		<javac srcdir="${src.main}" destdir="${build}"/>
 	</target>
 
-	<target name="compile_P1" depends="init" description="Compile P1">
-		<javac srcdir="${src.main}" includes="P1.java" destdir="${build}"/>
+	<target name="compile_P1" depends="init, problem_interface" description="Compile P1">
+		<javac srcdir="${src.main}" includes="P1.java, S1.java" destdir="${build}"/>
 	</target>
-	<target name="compile_P2" depends="init" description="Compile P2">
-		<javac srcdir="${src.main}" includes="P2.java" destdir="${build}"/>
+	<target name="compile_P2" depends="init, problem_interface" description="Compile P2">
+		<javac srcdir="${src.main}" includes="P2.java, S2.java" destdir="${build}"/>
 	</target>
-	<target name="compile_P3" depends="init, prime" description="Compile P3">
-		<javac srcdir="${src.main}" includes="P3.java" destdir="${build}"/>
+	<target name="compile_P3" depends="init, problem_interface, prime" description="Compile P3">
+		<javac srcdir="${src.main}" includes="P3.java, S3.java" destdir="${build}"/>
 	</target>
 	<target name="compile_P4" depends="init, problem_interface, palindrome" description="Compile P4">
-		<javac srcdir="${src.main}" includes="P4.java" destdir="${build}"/>
+		<javac srcdir="${src.main}" includes="P4.java, S4.java" destdir="${build}"/>
 	</target>
 	<!--========================================================-->
 
 	<!--======================== DIST ==========================-->
+	<!--
 	<target name="P1" depends="compile_P1, dist" description="Jar P1">
 		<jar jarfile="${dist}/euler_P1_${DSTAMP}.jar" basedir="${build}">
 			<manifest>
@@ -80,6 +81,14 @@
 		<jar jarfile="${dist}/euler_P4_${DSTAMP}.jar" basedir="${build}">
 			<manifest>
 				<attribute name="Main-Class" value="com.gatesunder.euler.P4"/>
+			</manifest>
+		</jar>
+	</target>
+	-->
+	<target name="Euler" depends="compile_all" description="Complete Problem Set Jar">
+		<jar jarfile="${dist}/Euler_${DSTAMP}.jar" basedir="${build}">
+			<manifest>
+				<attribute name="Main-Class" value="com.gatesunder.euler.Euler"/>
 			</manifest>
 		</jar>
 	</target>
